@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>QRcode Generator</title>
+  </head>
+  <body>
+
+    <section id="top_navbar">
+      <div class="container-fluid">
+        <div class="row" style="background-color:#483D8B;">
+          <div class="col-sm-12 mt-2 mb-2" style="font-family:'Comic Sans MS'; font-size: 80px; color:white;">
+            <center><b>QR Code Generator</b></center>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="main">
+      <div class="container">
+          <div class="row mt-4">
+          </div>
+            <div class="row">
+              <h1>Steps to Generate QR Code :-</h1>
+            </div>
+            <div class="row">
+                <hr align="left" width="70%">
+            </div>
+            <div class="row" style="font-size: 30px;">
+                <ul>
+                  <li><b>Step 1 :</b> Enter the text into the text area</li>
+                  <li><b>Step 2 :</b> Click on the <b>Generate QR Code</b> button</li>
+                  <li><b>Step 3 :</b> Generated QR will be display on R.H.S</li>
+                  <li><b>Step 4 :</b> Now you can save or share this QR</li>
+                </ul>
+            </div>
+            <div class="row">
+                <hr align="left" width="70%">
+            </div>
+
+            <form action="/home/generateQR" method="post">
+              {% csrf_token %}
+              <div class="form-group mt-4" style="font-size: 30px;">
+              <textarea cols="40" rows="5" name="text" placeholder="Enter text , link or mobile number"></textarea>
+              </div>
+              <div class="form-group mt-4 mb-4">
+                <button type="submit" class="btn btn-block btn-info" style="width:65%;"><span style="font-size: 40px;">Generate QR Code</span></button>
+              </div>
+            </form>
+
+
+          <div class="col-sm-6 mt-4">
+            {% if qrcode %}
+            <img src = '../../static/images/{{qrcode}}' alt="why ??">
+            {% endif %}
+          </div>
+
+        </div>
+    </section>
+  </body>
+</html>
